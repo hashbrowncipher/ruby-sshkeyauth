@@ -47,7 +47,7 @@ module SSH; module Key; class Signer
     identities = signing_identities 
     signatures = []
     identities.each do |identity|
-      if identity.private?
+      if identity.respond_to?(:private?) and identity.private?
         # FYI: OpenSSL::PKey::RSA#ssh_type and #ssh_do_sign are monkeypatched
         # by Net::SSH
         signature = SSH::Key::Signature.new
